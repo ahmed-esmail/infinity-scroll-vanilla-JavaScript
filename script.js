@@ -20,19 +20,29 @@ function displayImage(photosArray) {
   photosArray.forEach((image) => {
     // ancher element for photos
     console.log(image);
-    const anchor = document.createElement("a");
-    anchor.setAttribute("href", image.links.html);
-    anchor.setAttribute("target", "_blank");
+    const anchorElement = document.createElement("a");
+    setAttribute(anchorElement, {
+      href: image.links.html,
+      target: "_blank",
+    });
     // create image element
     const imageElement = document.createElement("img");
-    imageElement.setAttribute("src", image.urls.regular);
-    imageElement.setAttribute("alt", image.alt_description);
-    imageElement.setAttribute("title", image.alt_description);
+    setAttribute(imageElement, {
+      src: image.urls.regular,
+      alt: image.alt_description,
+      title: image.alt_description,
+    });
     // put image inside anchor tag and anchor tage inside imageContainer
 
-    anchor.appendChild(imageElement);
-    imageContainer.appendChild(anchor);
+    anchorElement.appendChild(imageElement);
+    imageContainer.appendChild(anchorElement);
   });
+}
+
+function setAttribute(element, attribute) {
+  for (const key in attribute) {
+    element.setAttribute(key, attribute[key]);
+  }
 }
 
 getPhotos();
